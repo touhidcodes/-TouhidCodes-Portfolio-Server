@@ -2,7 +2,7 @@ import * as bcrypt from "bcrypt";
 import prisma from "./prisma";
 import config from "../config/config";
 
-export const seedSuperAdmin = async () => {
+export const seedAdmin = async () => {
   try {
     const isExistAdmin = await prisma.auth.findFirst({
       where: {

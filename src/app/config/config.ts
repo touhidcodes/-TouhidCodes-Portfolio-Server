@@ -4,10 +4,8 @@ import path from "path";
 // Load environment variables from .env file
 dotenv.config({ path: path.join(process.cwd(), ".env") });
 
-if (!process.env.SUPER_ADMIN_EMAIL) {
-  throw new Error(
-    "SUPER_ADMIN_EMAIL is not defined in the environment variables"
-  );
+if (!process.env.ADMIN_EMAIL) {
+  throw new Error("ADMIN_EMAIL is not defined in the environment variables");
 }
 
 export default {
@@ -22,8 +20,8 @@ export default {
     reset_pass_token_expires_in: process.env.RESET_PASS_TOKEN_EXPIRES_IN,
   },
   admin: {
-    username: process.env.SUPER_ADMIN_USERNAME,
-    email: process.env.SUPER_ADMIN_EMAIL,
+    username: process.env.ADMIN_USERNAME,
+    email: process.env.ADMIN_EMAIL,
   },
   //Here add your other environment variables
 };
