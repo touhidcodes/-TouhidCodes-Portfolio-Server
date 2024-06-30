@@ -5,24 +5,21 @@ import * as bcrypt from "bcrypt";
 import config from "../../config/config";
 import APIError from "../../errors/APIError";
 import httpStatus from "http-status";
-import { UserStatus } from "@prisma/client";
 import { IChangePassword } from "./auth.interface";
 import { comparePasswords } from "../../utils/comparePassword";
 import { hashedPassword } from "../../utils/hashedPassword";
 
 const loginUser = async (payload: { identifier: string; password: string }) => {
-  let userData = await prisma.user.findUnique({
+  let userData = await prisma.auth.findUnique({
     where: {
       email: payload.identifier,
-      status: UserStatus.ACTIVE,
     },
   });
 
   if (!userData) {
-    userData = await prisma.user.findUnique({
+    userData = await prisma.auth.findUnique({
       where: {
         username: payload.identifier,
-        status: UserStatus.ACTIVE,
       },
     });
   }
@@ -45,7 +42,6 @@ const loginUser = async (payload: { identifier: string; password: string }) => {
       email: userData.email,
       username: userData.username,
       userId: userData.id,
-      role: userData.role,
     },
     config.jwt.access_token_secret as Secret,
     config.jwt.access_token_expires_in as string
@@ -79,7 +75,7 @@ const refreshToken = async (token: string) => {
     throw new Error("You are not authorized!");
   }
 
-  const userData = await prisma.user.findUniqueOrThrow({
+  const userData = await prisma.auth.findUniqueOrThrow({
     where: {
       email: decodedData.email,
     },
@@ -88,7 +84,6 @@ const refreshToken = async (token: string) => {
   const accessToken = jwtHelpers.generateToken(
     {
       email: userData.email,
-      role: userData.role,
     },
     config.jwt.access_token_secret as Secret,
     config.jwt.access_token_expires_in as string
@@ -102,10 +97,9 @@ const refreshToken = async (token: string) => {
 const changePassword = async (userId: string, payload: IChangePassword) => {
   const { oldPassword, newPassword } = payload;
 
-  const isUserExist = await prisma.user.findUnique({
+  const isUserExist = await prisma.auth.findUnique({
     where: {
       id: userId,
-      status: UserStatus.ACTIVE,
     },
   });
 
@@ -123,7 +117,7 @@ const changePassword = async (userId: string, payload: IChangePassword) => {
 
   const hashPassword = await hashedPassword(newPassword);
 
-  await prisma.user.update({
+  await prisma.auth.update({
     where: {
       id: isUserExist.id,
     },
