@@ -23,20 +23,6 @@ const getSkillCategories = catchAsync(async (req, res) => {
   });
 });
 
-const updateSkillCategory = catchAsync(async (req, res) => {
-  const { categoryId } = req.params;
-  const result = await skillCategoryServices.updateSkillCategory(
-    categoryId,
-    req.body
-  );
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Skill category updated successfully!",
-    data: result,
-  });
-});
-
 const deleteSkillCategory = catchAsync(async (req, res) => {
   const { categoryId } = req.params;
   const result = await skillCategoryServices.deleteSkillCategory(categoryId);
@@ -50,7 +36,6 @@ const deleteSkillCategory = catchAsync(async (req, res) => {
 
 export const skillCategoryControllers = {
   createSkillCategory,
-  updateSkillCategory,
   deleteSkillCategory,
   getSkillCategories,
 };

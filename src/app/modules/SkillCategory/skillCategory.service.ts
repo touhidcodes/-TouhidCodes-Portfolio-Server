@@ -1,4 +1,3 @@
-// skillCategory.service.ts
 import { SkillCategory } from "@prisma/client";
 import prisma from "../../utils/prisma";
 
@@ -11,19 +10,6 @@ const createSkillCategory = async (categoryData: SkillCategory) => {
 
 const getSkillCategories = async () => {
   const result = await prisma.skillCategory.findMany();
-  return result;
-};
-
-const updateSkillCategory = async (
-  categoryId: string,
-  categoryData: Partial<SkillCategory>
-) => {
-  const result = await prisma.skillCategory.update({
-    where: {
-      id: categoryId,
-    },
-    data: categoryData,
-  });
   return result;
 };
 
@@ -46,6 +32,5 @@ const deleteSkillCategory = async (categoryId: string) => {
 export const skillCategoryServices = {
   createSkillCategory,
   getSkillCategories,
-  updateSkillCategory,
   deleteSkillCategory,
 };

@@ -89,11 +89,12 @@ const updateSkill = async (skillId: string, skillData: Partial<Skill>) => {
 };
 
 const deleteSkill = async (skillId: string) => {
-  await prisma.skill.delete({
+  const result = await prisma.skill.delete({
     where: {
       id: skillId,
     },
   });
+  return result;
 };
 
 export const skillServices = {

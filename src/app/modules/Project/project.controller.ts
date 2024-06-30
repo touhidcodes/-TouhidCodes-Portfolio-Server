@@ -23,6 +23,17 @@ const getProjects = catchAsync(async (req, res) => {
   });
 });
 
+const getProjectById = catchAsync(async (req, res) => {
+  const { projectId } = req.params;
+  const result = await projectServices.getProjectById(projectId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Project retrieved successfully!",
+    data: result,
+  });
+});
+
 const createProject = catchAsync(async (req, res) => {
   const result = await projectServices.createProject(req.body);
   sendResponse(res, {
@@ -57,6 +68,7 @@ const deleteProject = catchAsync(async (req, res) => {
 
 export const projectControllers = {
   getProjects,
+  getProjectById,
   createProject,
   updateProject,
   deleteProject,

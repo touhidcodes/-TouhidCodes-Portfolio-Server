@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const createSkillCategorySchema = z.object({
+const createProjectCategorySchema = z.object({
   body: z.object({
     name: z
       .string({
@@ -10,6 +10,6 @@ const createSkillCategorySchema = z.object({
   }),
 });
 
-export const skillCategoryValidationSchemas = {
-  createSkillCategorySchema,
+export const projectCategoryValidationSchemas = {
+  createProjectCategorySchema,
 };

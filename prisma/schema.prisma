@@ -36,21 +36,20 @@ model Project {
   createdAt          DateTime        @default(now())
   updatedAt          DateTime        @updatedAt
   featured           Boolean         @default(false)
-  category           WebsiteCategory @relation(fields: [categoryId], references: [id])
+  category           ProjectCategory @relation(fields: [categoryId], references: [id])
   categoryId         String          @db.ObjectId
 
   @@map("projects")
 }
 
-model WebsiteCategory {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String    @unique
-  description String?
-  project     Project[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+model ProjectCategory {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String    @unique
+  project   Project[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  @@map("websiteCategories")
+  @@map("projectCategories")
 }
 
 model Skill {

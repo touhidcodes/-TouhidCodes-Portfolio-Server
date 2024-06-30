@@ -13,12 +13,6 @@ router.post(
 
 router.get("/", skillCategoryControllers.getSkillCategories);
 
-router.put(
-  "/:categoryId",
-  validateRequest(skillCategoryValidationSchemas.updateSkillCategorySchema),
-  skillCategoryControllers.updateSkillCategory
-);
-
 router.delete("/:categoryId", skillCategoryControllers.deleteSkillCategory);
 
 export const skillsCategoryRoutes = router;
