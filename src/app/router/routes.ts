@@ -1,7 +1,8 @@
 import express from "express";
 import { authRoutes } from "../modules/Auth/auth.routes";
-import { skillsRoutes } from "../modules/Skills/skill.router";
-import { skillsCategoryRoutes } from "../modules/SkillCategory/skillCategory.route";
+import { skillsRoutes } from "../modules/Skills/skill.routes";
+import { skillsCategoryRoutes } from "../modules/SkillCategory/skillCategory.routes";
+import { projectRoutes } from "../modules/Project/project.routes";
 
 const router = express.Router();
 
@@ -17,6 +18,10 @@ const moduleRoutes = [
   {
     path: "/skill-category",
     route: skillsCategoryRoutes,
+  },
+  {
+    path: "/project",
+    route: projectRoutes,
   },
 ];
 

@@ -31,13 +31,13 @@ model Project {
   frontEndLiveLink   String?
   backEndLiveLink    String?
   details            String
-  imageUrl           String?
+  thumbnail          String?
+  fullImage          String?
   createdAt          DateTime        @default(now())
   updatedAt          DateTime        @updatedAt
   featured           Boolean         @default(false)
   category           WebsiteCategory @relation(fields: [categoryId], references: [id])
   categoryId         String          @db.ObjectId
-  slug               String          @unique
 
   @@map("projects")
 }
