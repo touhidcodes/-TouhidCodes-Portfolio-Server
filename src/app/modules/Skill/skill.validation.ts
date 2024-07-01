@@ -22,8 +22,8 @@ const createSkillSchema = z.object({
 const updateSkillSchema = z.object({
   body: z.object({
     name: z.string().min(1, "Skill name cannot be empty").optional(),
-    skillCategoryId: z.string().uuid("Invalid category ID format").optional(),
-    level: z.enum(["Beginner", "Intermediate", "Advanced"]).optional(),
+    skillCategoryId: z.string().optional(),
+    level: z.enum(["Junior", "Intermediate", "Expert"]).optional(),
     icon: z.string().min(1, "Icon cannot be empty").optional(),
     description: z.string().min(1, "Description cannot be empty").optional(),
   }),

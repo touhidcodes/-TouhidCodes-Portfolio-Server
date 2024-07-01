@@ -9,7 +9,11 @@ const createProjectCategory = async (categoryData: ProjectCategory) => {
 };
 
 const getProjectCategories = async () => {
-  const result = await prisma.projectCategory.findMany();
+  const result = await prisma.projectCategory.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
   return result;
 };
 

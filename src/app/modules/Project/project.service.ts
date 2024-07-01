@@ -91,8 +91,14 @@ const getProjectById = async (projectId: string): Promise<Project | null> => {
 };
 
 const createProject = async (projectData: Project) => {
+  const { categoryId, ...data } = projectData;
   const result = await prisma.project.create({
-    data: projectData,
+    data: {
+      ...data,
+      category: {
+        connect: { id: categoryId },
+      },
+    },
   });
   return result;
 };
@@ -101,11 +107,17 @@ const updateProject = async (
   projectId: string,
   projectData: Partial<Project>
 ) => {
+  const { categoryId, ...data } = projectData;
   const result = await prisma.project.update({
     where: {
       id: projectId,
     },
-    data: projectData,
+    data: {
+      ...data,
+      category: {
+        connect: { id: categoryId },
+      },
+    },
   });
   return result;
 };

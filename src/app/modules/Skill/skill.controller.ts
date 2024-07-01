@@ -6,15 +6,7 @@ import queryPickers from "../../utils/queryPickers";
 import { skillFilterableFields } from "./skill.constants";
 
 const getSkills = catchAsync(async (req, res) => {
-  const filters = queryPickers(req.query, skillFilterableFields);
-  const options = queryPickers(req.query, [
-    "limit",
-    "page",
-    "sortBy",
-    "sortOrder",
-  ]);
-
-  const result = await skillServices.getSkills(filters, options);
+  const result = await skillServices.getSkills();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

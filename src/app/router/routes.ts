@@ -1,6 +1,6 @@
 import express from "express";
 import { authRoutes } from "../modules/Auth/auth.routes";
-import { skillsRoutes } from "../modules/Skills/skill.routes";
+import { skillsRoutes } from "../modules/Skill/skill.routes";
 import { skillsCategoryRoutes } from "../modules/SkillCategory/skillCategory.routes";
 import { projectRoutes } from "../modules/Project/project.routes";
 import { projectCategoryRoutes } from "../modules/ProjectCategory/projectCategory.routes";
