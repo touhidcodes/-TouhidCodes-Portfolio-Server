@@ -82,6 +82,7 @@ enum SkillLevel {
 
 model Blog {
   id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  thumbnail  String?
   title      String
   content    String
   category   BlogCategory @relation(fields: [categoryId], references: [id])

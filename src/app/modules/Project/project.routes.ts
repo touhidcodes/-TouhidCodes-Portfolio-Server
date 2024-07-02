@@ -2,6 +2,7 @@ import express from "express";
 import { projectValidationSchemas } from "./project.validation";
 import { projectControllers } from "./project.controller";
 import validateRequest from "../../middlewares/validateRequest";
+import auth from "../../middlewares/auth";
 
 const router = express.Router();
 
