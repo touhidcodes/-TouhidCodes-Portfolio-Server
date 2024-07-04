@@ -6,6 +6,7 @@ import { projectRoutes } from "../modules/Project/project.routes";
 import { projectCategoryRoutes } from "../modules/ProjectCategory/projectCategory.routes";
 import { blogRoutes } from "../modules/Blog/blog.routes";
 import { blogCategoryRoutes } from "../modules/BlogCategory/blogCategory.routes";
+import { resumeRoutes } from "../modules/Resume/resume.routes";
 
 const router = express.Router();
 
@@ -37,6 +38,10 @@ const moduleRoutes = [
   {
     path: "/blog-category",
     route: blogCategoryRoutes,
+  },
+  {
+    path: "/resume",
+    route: resumeRoutes,
   },
 ];
 

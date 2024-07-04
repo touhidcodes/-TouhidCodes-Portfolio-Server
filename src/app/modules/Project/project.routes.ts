@@ -10,6 +10,7 @@ router.get("/", projectControllers.getProjects);
 
 router.post(
   "/",
+  auth(),
   validateRequest(projectValidationSchemas.createProjectSchema),
   projectControllers.createProject
 );
@@ -18,10 +19,11 @@ router.get("/:projectId", projectControllers.getProjectById);
 
 router.put(
   "/:projectId",
+  auth(),
   validateRequest(projectValidationSchemas.updateProjectSchema),
   projectControllers.updateProject
 );
 
-router.delete("/:projectId", projectControllers.deleteProject);
+router.delete("/:projectId", auth(), projectControllers.deleteProject);
 
 export const projectRoutes = router;

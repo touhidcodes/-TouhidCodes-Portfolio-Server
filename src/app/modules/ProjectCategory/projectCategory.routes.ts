@@ -15,6 +15,10 @@ router.post(
 
 router.get("/", projectCategoryControllers.getProjectCategories);
 
-router.delete("/:categoryId", projectCategoryControllers.deleteProjectCategory);
+router.delete(
+  "/:categoryId",
+  auth(),
+  projectCategoryControllers.deleteProjectCategory
+);
 
 export const projectCategoryRoutes = router;

@@ -2,8 +2,6 @@ import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { skillServices } from "./skill.service";
-import queryPickers from "../../utils/queryPickers";
-import { skillFilterableFields } from "./skill.constants";
 
 const getSkills = catchAsync(async (req, res) => {
   const result = await skillServices.getSkills();
@@ -11,6 +9,15 @@ const getSkills = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Skills retrieved successfully!",
+    data: result,
+  });
+});
+const getGroupedSkills = catchAsync(async (req, res) => {
+  const result = await skillServices.getGroupedSkills();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Grouped skills retrieved successfully!",
     data: result,
   });
 });
@@ -49,6 +56,7 @@ const deleteSkill = catchAsync(async (req, res) => {
 
 export const skillControllers = {
   getSkills,
+  getGroupedSkills,
   createSkill,
   updateSkill,
   deleteSkill,

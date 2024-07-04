@@ -1,5 +1,6 @@
 import { Skill } from "@prisma/client";
 import prisma from "../../utils/prisma";
+import { TGroupedSkills } from "../../interfaces/common";
 
 const getSkills = async () => {
   const result = await prisma.skill.findMany({
@@ -12,6 +13,36 @@ const getSkills = async () => {
   });
 
   return result;
+};
+
+const getGroupedSkills = async () => {
+  const result = await prisma.skill.findMany({
+    include: {
+      skillCategory: true,
+    },
+    orderBy: [
+      {
+        skillCategory: {
+          name: "asc",
+        },
+      },
+      {
+        name: "asc",
+      },
+    ],
+  });
+
+  // Group skills by category name
+  const groupedSkills: TGroupedSkills = result.reduce((acc, skill) => {
+    const categoryName = skill.skillCategory.name;
+    if (!acc[categoryName]) {
+      acc[categoryName] = [];
+    }
+    acc[categoryName].push(skill);
+    return acc;
+  }, {} as TGroupedSkills);
+
+  return groupedSkills;
 };
 
 const createSkill = async (skillData: Skill) => {
@@ -52,6 +83,7 @@ const deleteSkill = async (skillId: string) => {
 
 export const skillServices = {
   getSkills,
+  getGroupedSkills,
   createSkill,
   updateSkill,
   deleteSkill,
